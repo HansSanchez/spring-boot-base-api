@@ -1,4 +1,4 @@
-package controllers;
+package controller;
 
 import dto.CreateOrUpdatePermission;
 import jakarta.validation.Valid;
@@ -8,7 +8,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import persistences.entities.Permission;
+import models.Permission;
 import services.PermissionService;
 
 
@@ -16,7 +16,7 @@ import java.util.Optional;
 
 
 @RestController
-@RequestMapping("api/permissions")
+@RequestMapping("permissions")
 public class PermissionController {
 
     @Autowired

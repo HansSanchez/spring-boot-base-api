@@ -9,7 +9,6 @@ public class CreateOrUpdateRole implements Serializable {
     private String display_name;
     // Fecha de creación
 
-
     public String getName() {
         return name;
     }

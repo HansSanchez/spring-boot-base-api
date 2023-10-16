@@ -1,11 +1,9 @@
 package services;
 
 import dto.CreateOrUpdatePermission;
-import dto.CreateOrUpdateRole;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import persistences.entities.Permission;
-import persistences.entities.Role;
+import models.Permission;
 
 import java.util.Optional;
 

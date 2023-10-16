@@ -1,23 +1,31 @@
-package persistences.entities;
+package models;
 
 import jakarta.persistence.*;
+import lombok.*;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import java.sql.Timestamp;
 import java.util.Date;
+import java.util.List;
 
 @Entity
-public class Role{
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@ToString
+@Table(name = "roles")
+public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // Llave primaria
     private Long id;
     // Nombre del Rol para el sistema
-    @Column(name = "name", columnDefinition = "VARCHAR(191)", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
     // Nombre del Rol para el usuario
-    @Column(name = "display_name", columnDefinition = "VARCHAR(191)", nullable = false)
+    @Column(name = "display_name", nullable = false)
     private String display_name;
     // Fecha de creación
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
@@ -39,43 +47,11 @@ public class Role{
         updated_at = new Timestamp((new Date()).getTime());
     }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getDisplay_name() {
-        return display_name;
-    }
-
-    public void setDisplay_name(String display_name) {
-        this.display_name = display_name;
-    }
-
-    public Timestamp getCreated_at() {
-        return created_at;
-    }
-
-    public void setCreated_at(Timestamp created_at) {
-        this.created_at = created_at;
-    }
-
-    public Timestamp getUpdated_at() {
-        return updated_at;
-    }
-
-    public void setUpdated_at(Timestamp updated_at) {
-        this.updated_at = updated_at;
-    }
+    @ManyToMany
+    @JoinTable(
+            name = "role_permission",
+            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "id")
+    )
+    private List<Permission> permissions;
 }

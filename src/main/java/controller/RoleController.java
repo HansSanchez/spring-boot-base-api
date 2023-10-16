@@ -1,4 +1,4 @@
-package controllers;
+package controller;
 
 import dto.CreateOrUpdateRole;
 import jakarta.validation.Valid;
@@ -8,14 +8,14 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import persistences.entities.Role;
+import models.Role;
 import services.RoleService;
 
 import java.util.Optional;
 
 
 @RestController
-@RequestMapping("api/roles")
+@RequestMapping("roles")
 public class RoleController {
 
     @Autowired

@@ -3,7 +3,7 @@ package services;
 import dto.CreateOrUpdateRole;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import persistences.entities.Role;
+import models.Role;
 
 import java.util.Optional;
 
