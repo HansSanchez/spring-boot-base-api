@@ -12,20 +12,21 @@ import java.util.List;
 
 @Entity
 @Data
-@Table(name = "tb_roles")
-public class TBRole {
+@Table(name = "tb_permissions")
+public class Permission {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // Llave primaria
     Long id;
 
     // Nombre del Rol para el sistema
-    @Column(name = "name", nullable = false)
-    String name;
+    @Column(name = "key_name", nullable = false)
+    String key_name;
 
     // Nombre del Rol para el usuario
-    @Column(name = "display_name", nullable = false)
-    String display_name;
+    @Column(name = "table_name")
+    String table_name;
 
     // Fecha de creación
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
@@ -37,13 +38,9 @@ public class TBRole {
     @UpdateTimestamp
     Timestamp updated_at;
 
-    @ManyToMany
-    @JoinTable(
-            name = "tb_role_permission",
-            joinColumns = @JoinColumn(name = "tb_role_id"),
-            inverseJoinColumns = @JoinColumn(name = "tb_permission_id")
-    )
-    List<TBPermission> tb_permissions;
+    // Relación de muchos a muchos con roles
+    @ManyToMany(mappedBy = "tb_permissions")
+    List<Role> tb_roles;
 
     // Guardado automático de la fecha de creación
     @PrePersist
@@ -56,5 +53,4 @@ public class TBRole {
     protected void onUpdate() {
         updated_at = new Timestamp((new Date()).getTime());
     }
-
 }
