@@ -7,6 +7,6 @@ Este es un desarrollo base para la creación de una API con Spring Boot, la idea
 5. Implementar la tabla intermedia de role_permission
 6. Implementar el modelo de Users
 7. Implementar la tabla intermedia de user_role
-8. Implementar el modelo de Tracking_Actions <em>(Es un módulo para seguimiento de las acciones del usuario en el sistema)</em>
+8. Implementar el modelo de Tracking_Actions ***(Es un módulo para seguimiento de las acciones del usuario en el sistema)***
 
 Hasta el momento es solo el inicio de esta estructura base
