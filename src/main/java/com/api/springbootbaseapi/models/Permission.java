@@ -15,10 +15,10 @@ import java.util.List;
 @Table(name = "tb_permissions")
 public class Permission {
 
+    // Llave primaria
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // Llave primaria
-    Long id;
+    private Long id;
 
     // Nombre del Rol para el sistema
     @Column(name = "key_name", nullable = false)

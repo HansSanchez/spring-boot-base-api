@@ -14,28 +14,29 @@ import java.util.List;
 @Data
 @Table(name = "tb_roles")
 public class Role {
+
+    // Llave primaria
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // Llave primaria
-    Long id;
+    private Long id;
 
     // Nombre del Rol para el sistema
     @Column(name = "name", nullable = false)
-    String name;
+    private String name;
 
     // Nombre del Rol para el usuario
     @Column(name = "display_name", nullable = false)
-    String display_name;
+    private String display_name;
 
     // Fecha de creación
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
     @CreationTimestamp
-    Timestamp created_at;
+    private Timestamp created_at;
 
     // Fecha de actualización
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP")
     @UpdateTimestamp
-    Timestamp updated_at;
+    private Timestamp updated_at;
 
     @ManyToMany
     @JoinTable(
@@ -43,7 +44,16 @@ public class Role {
             joinColumns = @JoinColumn(name = "tb_role_id"),
             inverseJoinColumns = @JoinColumn(name = "tb_permission_id")
     )
-    List<Permission> tb_permissions;
+    private List<Permission> tb_permissions;
+
+    // Relación con los roles
+    @ManyToMany
+    @JoinTable(
+            name = "tb_user_role",
+            joinColumns = @JoinColumn(name = "tb_role_id"),
+            inverseJoinColumns = @JoinColumn(name = "tb_user_id")
+    )
+    private List<User> tb_users;
 
     // Guardado automático de la fecha de creación
     @PrePersist
