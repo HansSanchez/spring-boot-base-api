@@ -1,4 +1,4 @@
-package exception;
+package com.api.springbootbaseapi.exception;
 
 public class ObjectNotFoundException extends RuntimeException{
     public ObjectNotFoundException() {

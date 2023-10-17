@@ -1,7 +1,8 @@
-package models;
+package com.api.springbootbaseapi.models;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -11,42 +12,45 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Table(name = "permissions")
-public class Permission {
+@Table(name = "tb_permissions")
+public class TBPermission {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // Llave primaria
-    private Long id;
+    Long id;
+
     // Nombre del Rol para el sistema
-    @Column(name = "key", nullable = false)
-    private String key;
+    @Column(name = "key_name", nullable = false)
+    String key_name;
+
     // Nombre del Rol para el usuario
     @Column(name = "table_name")
-    private String table_name;
+    String table_name;
+
     // Fecha de creación
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
     @CreationTimestamp
-    private Timestamp created_at;
+    Timestamp created_at;
+
     // Fecha de actualización
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP")
     @UpdateTimestamp
-    private Timestamp updated_at;
+    Timestamp updated_at;
 
-    @ManyToMany(mappedBy = "permissions")
-    private List<Role> roles;
+    // Relación de muchos a muchos con roles
+    @ManyToMany(mappedBy = "tb_permissions")
+    List<TBRole> tb_roles;
 
     // Guardado automático de la fecha de creación
     @PrePersist
     protected void onCreate() {
         created_at = new Timestamp((new Date()).getTime());
     }
+
     // Guardado automático de la fecha de autoalización
     @PreUpdate
     protected void onUpdate() {
         updated_at = new Timestamp((new Date()).getTime());
     }
-
 }

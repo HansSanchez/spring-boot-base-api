@@ -1,4 +1,4 @@
-package models;
+package com.api.springbootbaseapi.models;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,46 +12,49 @@ import java.util.List;
 
 @Entity
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
-@Table(name = "roles")
-public class Role {
+@Table(name = "tb_roles")
+public class TBRole {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     // Llave primaria
-    private Long id;
+    Long id;
+
     // Nombre del Rol para el sistema
     @Column(name = "name", nullable = false)
-    private String name;
+    String name;
+
     // Nombre del Rol para el usuario
     @Column(name = "display_name", nullable = false)
-    private String display_name;
+    String display_name;
+
     // Fecha de creación
     @Column(name = "created_at", columnDefinition = "TIMESTAMP")
     @CreationTimestamp
-    private Timestamp created_at;
+    Timestamp created_at;
+
     // Fecha de actualización
     @Column(name = "updated_at", columnDefinition = "TIMESTAMP")
     @UpdateTimestamp
-    private Timestamp updated_at;
+    Timestamp updated_at;
+
+    @ManyToMany
+    @JoinTable(
+            name = "tb_role_permission",
+            joinColumns = @JoinColumn(name = "tb_role_id"),
+            inverseJoinColumns = @JoinColumn(name = "tb_permission_id")
+    )
+    List<TBPermission> tb_permissions;
 
     // Guardado automático de la fecha de creación
     @PrePersist
     protected void onCreate() {
         created_at = new Timestamp((new Date()).getTime());
     }
+
     // Guardado automático de la fecha de autoalización
     @PreUpdate
     protected void onUpdate() {
         updated_at = new Timestamp((new Date()).getTime());
     }
 
-    @ManyToMany
-    @JoinTable(
-            name = "role_permission",
-            joinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "permission_id", referencedColumnName = "id")
-    )
-    private List<Permission> permissions;
 }

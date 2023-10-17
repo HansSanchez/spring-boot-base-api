@@ -1,4 +1,4 @@
-package dto;
+package com.api.springbootbaseapi.dto;
 
 import java.io.Serializable;
 
